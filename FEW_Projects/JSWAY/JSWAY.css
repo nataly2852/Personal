@@ -4,6 +4,11 @@ body {
     padding: 0;
 }
 
-main{
+main {
     margin: 2em;
+}
+
+main>canvas {
+    display: block;
+    margin: 0 auto;
 }
