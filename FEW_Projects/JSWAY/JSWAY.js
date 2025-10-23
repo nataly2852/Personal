@@ -12,11 +12,13 @@ const Rat = {
 
     grow() {
         this.age++;
+        console.log(this.grow);
         return `Happy Birthday Sally! Congrats on ${this.age} years!`;
     },
 
     damage() {
         this.health--;
+        console.log(this.damage);
         return `Yow! Sally took damage! ${this.health}hp left!`;
     }
 };
@@ -69,7 +71,7 @@ document.addEventListener('keydown',
     function (event) {
         if (event.code === "Space" && !spacePressed) {
             Rat.grow();
-            console.log(Rat.grow());
+            // console.log(Rat.grow());
 
         }
 
