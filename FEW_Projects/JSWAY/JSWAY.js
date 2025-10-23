@@ -56,8 +56,8 @@ function setup() {
     //Console
     console.log(word, word.length, word.toLowerCase(), word.toUpperCase());
     fill("brown");
-    circle(width / 2, height / 2, Rat.size);
-    text("this is sally", width / 2, height / 2 + 20);
+    circle(width / 2 + 20, height / 2, Rat.size);
+    text("this is sally", width / 2 +20, height / 2 - 50);
 }
 
 function draw() {
