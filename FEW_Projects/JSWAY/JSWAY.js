@@ -75,7 +75,7 @@ document.addEventListener('keydown',
 
         if (event.code === "Enter") {
             Rat.damage();
-            console.log(Rat.damage());
+            // console.log(Rat.damage());
         }
 
         if (event.code === "ShiftLeft" && !shiftPressed) {
