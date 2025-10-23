@@ -69,7 +69,7 @@ document.addEventListener('keydown',
     function (event) {
         if (event.code === "Space" && !spacePressed) {
             Rat.grow();
-            console.log(Rat.age);
+            console.log(Rat.grow());
 
         }
 
