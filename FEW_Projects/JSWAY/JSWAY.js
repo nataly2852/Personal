@@ -13,13 +13,13 @@ const Rat = {
     grow() {
         this.age++;
         console.log(`Happy Birthday Sally! Congrats on ${this.age} years!`);
-        return `Happy Birthday Sally! Congrats on ${this.age} years!`;
+        // return `Happy Birthday Sally! Congrats on ${this.age} years!`;
     },
 
     damage() {
         this.health--;
         console.log(`Yow! Sally took damage! ${this.health}hp left!`);
-        return `Yow! Sally took damage! ${this.health}hp left!`;
+        // return `Yow! Sally took damage! ${this.health}hp left!`;
     }
 };
 
