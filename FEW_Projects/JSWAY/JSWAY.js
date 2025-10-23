@@ -28,7 +28,7 @@ fruits.forEach(fruit => {
 )
 
 let shiftPressed = false;
-
+let spacePressed = false;
 
 function setup() {
     createCanvas(400, 400);
@@ -67,9 +67,10 @@ function draw() {
 
 document.addEventListener('keydown',
     function (event) {
-        if (event.code === "Space") {
+        if (event.code === "Space" && !spacePressed) {
             Rat.grow();
-            console.log(Rat.grow());
+            console.log(Rat.age);
+
         }
 
         if (event.code === "Enter") {
