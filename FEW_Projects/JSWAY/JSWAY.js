@@ -69,31 +69,33 @@ function draw() {
 
 document.addEventListener('keydown',
     function (event) {
-        if (event.code === "Space" && !spacePressed) {
-            Rat.grow();
-            // console.log(Rat.grow());
+        // if (event.code === "Space" && !spacePressed) {
+        //     Rat.grow();
+        //     // console.log(Rat.grow());
 
-        }
+        // }
 
         if (event.code === "Enter") {
             Rat.damage();
             // console.log(Rat.damage());
         }
 
-        if (event.code === "ShiftLeft" && !shiftPressed) {
-            fruits.forEach(fruit => {
+        if (event.code === "Space" && !shiftPressed) {
+            //fruits.forEach(fruit => {
                 fruits.push('watermelon');
                 fruits.unshift('banana');
                 console.log(fruits);
-            })
+            //})
         }
 
         if (event.code === "Backspace") {
-            fruits.forEach(fruit => {
+            //fruits.forEach(fruit => {
                 fruits.pop();
                 console.log(fruits);
-            })
+            //})
         }
+
+        event.stopPropagation();
 
     });
 
