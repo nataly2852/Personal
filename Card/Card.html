@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="Card.css">
+    <meta charset="utf-8" />
+
+</head>
+
+<body>
+    <section id="deck">
+        <h1>Deck of Cards</h1>
+        <div id="deck-container">
+            <card-div></card-div>
+            <card-div></card-div>
+
+        </div>
+        <div>
+            <button>flip</button>
+            <button>shuffle</button>
+            <button>hide</button>
+        </div>
+    </section>
+    <section id="hand">
+        <h1>My Hand</h1>
+        <div id="hand-container">
+        </div>
+        <div>
+            <button>draw</button>
+        </div>
+    </section>
+    <script src="main.js"></script>
+    <script src="Card.js"></script>
+</body>
+
+</html>

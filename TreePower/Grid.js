@@ -70,6 +70,7 @@ class Grid {
   }
 
   forEach(func) {
+      noStroke();
     for (let i = 0; i < this.cols; i++) {
       for (let j = 0; j < this.rows; j++) {
         func(i, j);

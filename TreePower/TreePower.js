@@ -38,8 +38,8 @@ const COLOR = {
   branch: "brown",
   minibranch: "brown",
   leaf: "rgba(30, 155, 47, 1)",
-  leafend: "rgba(98, 242, 119, 1)",
-  nothing: "black",
+  leafend: "rgba(47, 169, 66, 1)",
+  nothing: "rgba(156, 214, 255, 1)",
   fire: "orange",
 };
 
@@ -111,6 +111,7 @@ function gotResults(results) {
 ////////////DRAW/////////////////////////////////
 
 function draw() {
+
   image(video, 0, 0, 300, video.height / 2);
   image(painting, 0, 0, 300, video.height / 2);
   drawKeypoints(predictions);

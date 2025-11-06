@@ -1,0 +1,31 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: beige;
+    text-align: center;
+    justify-items: center;
+}
+
+#deck-container {
+    background-color: white;
+    height: 30vh;
+    width: 30vw;
+    justify-self: center;
+}
+
+#hand-container {
+    background-color: white;
+    height: 30vh;
+    width: 30vw;
+    justify-self: center;
+}
+
+card-div{
+    display:inline-block;
+    background-color:antiquewhite;
+    padding: 1em;
+}
