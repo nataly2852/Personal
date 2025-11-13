@@ -1,0 +1,95 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    height: 5vh;
+}
+
+body {
+    background: rgb(255, 255, 255);
+}
+
+#bannerRoll {
+    /* background-color: pink; */
+    width: 100vw;
+    height: 50vh;
+    display: inline-flex;
+}
+
+.animPeel {
+    transition: all 750ms ease-in-out;
+}
+
+#Sakuma {
+    position: relative;
+    width: 15vw;
+    height: 50vh;
+    /* background-color: beige; */
+    margin: 0 auto;
+    backface-visibility: hidden;
+    /* Used to hide the back of the card */
+    align-content: center;
+}
+
+
+.Banner {
+    position: absolute;
+    /* background-color: white; */
+    overflow: hidden;
+}
+
+.bannerImg {
+    position: absolute;
+    width: 15vw;
+    height: 50vh;
+}
+
+.back {
+    position: absolute;
+    /* background-color: pink; */
+    z-index: -1;
+    width: 15vw;
+    height: 50vh;
+}
+
+#projectImg {
+    position: absolute;
+    width: 15vw;
+    height: 50vh;
+}
+
+#bannerImg {
+    position: absolute;
+    width: 15vw;
+    height: 50vh;
+    margin: 1em;
+    z-index: 1;
+    align-content: center;
+}
+
+
+#bannerText>p {
+    font-size: 1em;
+}
+
+.front {
+    width: 15vw;
+    height: 50vh;
+    top: auto;
+    /*   display:none; */
+}
+
+#Sakuma:hover .front {
+    height: 30px;
+    box-shadow: 0px 25px 15px 0px rgba(178, 137, 102, 0.31);
+    /* Initial shadow */
+}
+
+#Sakuma:hover #bannerImg {
+    height: 30px;
+    box-shadow: 0px 25px 15px 0px rgba(178, 137, 102, 0.31);
+    /* Initial shadow */
+}
