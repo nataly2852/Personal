@@ -2,70 +2,80 @@ html,
 body {
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
+    /* 🔹 Prevent horizontal scroll */
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background-color: antiquewhite;
 }
+
 
 header {
-    height: 5vh;
-    background-color: antiquewhite;
+    height: 15vh;
+    width: 100%;
+    background-color: rgb(214, 194, 167);
 }
 
-body {
-    background-color: antiquewhite;
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
 }
+
+/* stagger even items up */
+#bannerRoll .Sakuma:nth-child(even) {
+    transform: translateY(-60px);
+}
+
+/* stagger odd items down (optional) */
+#bannerRoll .Sakuma:nth-child(odd) {
+    transform: translateY(60px);
+}
+
 
 #bannerRoll {
-    /* background-color: pink; */
-    width: 100vw;
-    height: 50vh;
-    display: inline-flex;
+    background-color: pink;
+    width: 100%;
+    height: 100vh;
+    gap: 2em;
+    transform: translateY(100px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;;
+    /* justify-content: space-around; */
 }
 
 .animPeel {
     transition: all 750ms ease-in-out;
 }
 
-#Sakuma {
-    position: relative;
-    width: 15vw;
+.Sakuma {
+    width: auto;
     height: 50vh;
     /* background-color: beige; */
-    margin: 0 auto;
+    display: inline-flex;
     backface-visibility: hidden;
     /* Used to hide the back of the card */
-    align-content: center;
 }
 
 
 .Banner {
-    position: absolute;
     /* background-color: white; */
     overflow: hidden;
     box-shadow: 0px 5px 5px 5px rgba(178, 137, 102, 0.082);
-}
-
-.bannerImg {
-    position: absolute;
-    width: 15vw;
-    height: 50vh;
 }
 
 .back {
     position: absolute;
     /* background-color: pink; */
     z-index: -1;
-    width: 15vw;
-    height: 50vh;
 }
 
-#projectImg {
-    position: absolute;
-    width: 15vw;
-    height: 50vh;
-}
 
 #bannerImg {
-    position: absolute;
-    width: 15vw;
+    width: auto;
     height: 50vh;
     margin: 1em;
     z-index: 1;
@@ -78,26 +88,26 @@ body {
 }
 
 .front {
-    width: 15vw;
+    width: auto;
     height: 50vh;
-    top: auto;
     /*   display:none; */
 }
 
 
-#Sakuma:hover #bannerImg {
+.Sakuma:hover #bannerImg {
     height: 30px;
     box-shadow: 0px 25px 15px 0px rgba(178, 137, 102, 0.31);
     transform: translateY(-20px);
     /* Initial shadow */
 }
 
-#Sakuma:hover .Banner {
+.Sakuma:hover .Banner {
     height: 30px;
     transform: translateY(-20px);
+    box-shadow: 0px 5px 15px 10px rgba(178, 137, 102, 0.31);
 }
 
-#Sakuma:hover #projectImg {
+.Sakuma:hover #projectImg {
     height: 30px;
     transform: translateY(-20px);
 }
