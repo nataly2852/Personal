@@ -12,11 +12,11 @@ thumbs.forEach((img) => {
 const scrollBox = document.querySelector(".scrollBox");
 
 document.querySelector(".arrow.up").addEventListener("click", () => {
-    scrollBox.scrollBy({ top: -225, behavior: "smooth" });
+    scrollBox.scrollBy({ top: -432, behavior: "smooth" });
 });
 
 document.querySelector(".arrow.down").addEventListener("click", () => {
-    scrollBox.scrollBy({ top: 225, behavior: "smooth" });
+    scrollBox.scrollBy({ top: 432, behavior: "smooth" });
 });
 
 
@@ -44,4 +44,38 @@ thumbs.forEach((img) => {
     const description = img.getAttribute("data-desc");
     detailText.textContent = description;
   });
+});
+
+
+// Get the banner ID from the URL
+const params = new URLSearchParams(window.location.search);
+const bannerId = params.get("banner"); // e.g., "1"
+
+
+function selectBanner(index) {
+    const wrapper = thumbs[index].closest(".img-box");
+    
+    // Remove active from all
+    document.querySelectorAll(".img-box").forEach(w => w.classList.remove("active"));
+    
+    // Activate this one
+    wrapper.classList.add("active");
+    detailText.textContent = thumbs[index].getAttribute("data-desc");
+
+    // Scroll into view
+    wrapper.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+// If URL had banner ID, select it
+if (bannerId) {
+    const index = parseInt(bannerId) - 1; // convert to 0-based
+    if (thumbs[index]) selectBanner(index);
+} else {
+    // Default to first
+    selectBanner(0);
+}
+
+// Also keep your click event for manual selection
+thumbs.forEach((img, i) => {
+  img.addEventListener("click", () => selectBanner(i));
 });
