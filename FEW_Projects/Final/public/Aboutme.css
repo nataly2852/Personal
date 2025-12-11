@@ -1,0 +1,61 @@
+header {
+    /* background-color: rgb(255, 240, 224); */
+    background-image: url("Aesprite_Assets/headerdesign.png");
+    background-position: center;
+    height: 12vh;
+    top: 0;
+    padding: 4e;
+    width: 100%;
+    border-bottom: 6px solid #94BDB1;
+
+    display: flex;
+    /* NEW */
+    justify-content: space-between;
+    /* pushes logo left, buttons right */
+    align-items: center;
+    /* vertically centers both */
+    padding: 0 40px 0 40px;
+    /* <-- left & right padding */
+}
+
+#Logo {
+    background-image: url("Aesprite_Assets/Logo.png");
+    background-size: cover;
+    justify-content: flex-start;
+    width: 240px;
+    height: 120px;
+    background-repeat: no-repeat;
+    background-color: #6a4a3400;
+    border: none;
+    justify-content: center;
+
+}
+
+.Logo-container {
+    width: fit-content;
+    display: inline-flex;
+    align-self: center;
+}
+
+.Directory-container {
+    display: inline-flex;
+    padding-right: 100px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+}
+
+.Directory {
+    background-color: #a6cfc6;
+    border-radius: 4em;
+    border: 2px solid #326568;
+    font-size: 16px;
+    height: 3em;
+    width: 8em;
+    align-items: center;
+    justify-content: center;
+}
+
+.Directory:hover {
+    background-color: #eee;
+}
