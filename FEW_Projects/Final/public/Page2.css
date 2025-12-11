@@ -24,28 +24,34 @@ body {
 }
 
 header {
+    /* background-color: rgb(255, 240, 224); */
     background-image: url("Aesprite_Assets/headerdesign.png");
-    background-position: center;
-    height: 12vh;
+    background-position: center center;
+    background-size: cover;
     background-color: #ffe6cb;
+    height: 12vh;
     top: 0;
-    padding: 4e;
+    padding: 4em;
     width: 100%;
     border-bottom: 6px solid #94BDB1;
     background-repeat: no-repeat;
     display: flex;
     justify-content: space-between;
+    /* pushes logo left, buttons right */
     align-items: center;
+    /* vertically centers both */
     padding: 0 40px 0 40px;
+    /* <-- left & right padding */
 }
 
 #Logo {
     background-image: url("Aesprite_Assets/Logo.png");
     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     justify-content: flex-start;
     width: 50px;
     height: 90px;
-    background-repeat: no-repeat;
     background-color: #6a4a3400;
     border: none;
     justify-content: center;
@@ -257,7 +263,8 @@ button>.arrow {
     align-items: center;
     justify-content: center;
 }
-#detailLink:hover{
+
+#detailLink:hover {
     background-color: #eee;
 }
 
