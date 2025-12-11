@@ -7,7 +7,8 @@
 header {
   /* background-color: rgb(255, 240, 224); */
   background-image: url("Aesprite_Assets/headerdesign.png");
-  background-position: center;
+  background-position: center center;
+  background-size: cover;
   background-color: #ffe6cb;
   height: 12vh;
   top: 0;
@@ -16,7 +17,6 @@ header {
   border-bottom: 6px solid #94BDB1;
   background-repeat: no-repeat;
   display: flex;
-  /* NEW */
   justify-content: space-between;
   /* pushes logo left, buttons right */
   align-items: center;
@@ -28,10 +28,11 @@ header {
 #Logo {
   background-image: url("Aesprite_Assets/Logo.png");
   background-size: cover;
-  justify-content: flex-start;
-  width: 80px;
-  height: 120px;
+  background-position: center;
   background-repeat: no-repeat;
+  justify-content: flex-start;
+  width: 50px;
+  height: 90px;
   background-color: #6a4a3400;
   border: none;
   justify-content: center;
@@ -82,6 +83,7 @@ body {
   background-position: center;
   /* keeps it centered */
   background-repeat: no-repeat;
+  overflow-x: hidden;
 }
 
 .grid {
@@ -95,35 +97,6 @@ body {
   align-items: start;
 }
 
-/* The spinning circle */
-.loader {
-  border: 8px solid #f3f3f3;
-  /* Light grey */
-  border-top: 8px solid #94BDB1;
-  /* Your theme teal color */
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 1s linear infinite;
-
-  /* Centering logic inside the CSS Grid */
-  grid-column: 1 / -1;
-  /* Spans all 3 columns */
-  justify-self: center;
-  align-self: center;
-  margin-top: 10vh;
-}
-
-/* The animation definition */
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 /* Generic cell look */
 .cell {
@@ -159,11 +132,12 @@ body {
 .rect {
   aspect-ratio: 1 / 1.6;
   /* Keeps the tall shape */
-  width: 300px;
+  /* width: 300px;
   /* Fill the grid column */
-  height: 500px;
+  /* height: 500px; */
   /* Let height scale automatically */
-  justify-self: center;
+  width: 100%;
+  justify-self: stretch;
 }
 
 /* Example: put an image to cover the box */
@@ -191,5 +165,54 @@ body {
 @media (max-width: 560px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Page1.css: Add this new media query */
+
+/* Responsive adjustment for screens smaller than 600px (standard mobile size) */
+@media (max-width: 600px) {
+
+  /* Step 1: Switch to 2 columns for a better mobile layout */
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    /* Reduce padding around the grid */
+    padding: 1em;
+    gap: 8px;
+    /* Slightly reduce the gap */
+  }
+
+  /* Step 2: Shrink the size of the project images (the .rect containers) */
+  .rect {
+    /* This sets a maximum size for the image container 
+           while still letting it shrink if the screen is tiny. */
+    max-width: 180px;
+    max-height: 288px;
+    /* 180 * 1.6 */
+
+    /* Ensure the images are centered within their grid cell */
+    justify-self: center;
+  }
+
+  /* Step 3: Reduce Directory button size to prevent header overflow */
+  .Directory {
+    font-size: 14px;
+    height: 2.5em;
+    width: 7em;
+  }
+
+  .Directory-container{
+        padding-right: 10px;
+  }
+
+  /* Step 4: Adjust header padding and logo size to save space */
+  header {
+    padding: 0 10px;
+  }
+
+  #Logo {
+    width: 40px;
+    height: 72px;
+    /* Maintain aspect ratio (40*1.8) */
   }
 }

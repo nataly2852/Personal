@@ -47,6 +47,8 @@ async function fetchBanners() {
 
       // Note: The Link property is correctly using the dedicated URL property:
       link: page.properties["Link"]?.url || "",
+      thumbAria: page.properties["Thumbnail Aria"]?.rich_text?.[0]?.plain_text || "",
+      extraAria: page.properties["Extra Img Aria"]?.rich_text?.[0]?.plain_text || "",
     }));
 
     console.log("Banners updated from Notion!");

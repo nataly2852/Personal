@@ -22,7 +22,7 @@ header {
 }
 
 #Logo {
-    background-image: url("Aesprite_Assets/Logo.png");
+    background-image: url("../Aesprite_Assets/Logo.png");
     background-size: cover;
     justify-content: flex-start;
     width: 240px;
@@ -68,7 +68,7 @@ body {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
         Arial;
     background: #fafafa;
-    background-image: url("Aesprite_Assets/BackgroundBorderFlower.png");
+    background-image: url("../Aesprite_Assets/BackgroundBorderFlower.png");
     background-size: cover;
     /* fills screen */
     background-position: center;

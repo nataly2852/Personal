@@ -1,14 +1,14 @@
-// CORRECTED CODE in Page2.js (near the top)
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const scrollContainer = document.getElementById("scrollContainer");
     const detailText = document.getElementById("detailText");
     const detailImage = document.getElementById("detailImage");
     const detailTitle = document.getElementById("detailTitle");
-    // const detailLink = document.getElementById("detailLink"); // REMOVE: Not needed, you use the anchor
-    const detailLinkAnchor = document.getElementById("detailLinkContainer"); // <-- FIX: Use correct HTML ID
-    let allBanners = []; 
-    // --- Helper Functions ---
+    const detailAria = document.getElementById("detailTitle");
+    const detailLinkAnchor = document.getElementById("detailLinkContainer"); 
+    let allBanners = [];
+
 
     // Function to get query parameters from the URL
     function getQueryParam(param) {
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //set title
         detailTitle.textContent = banner.title;
 
-        // 1. Update the description text
+        //Update the description text
         detailText.textContent = banner.description;
 
         // Set the link attribute and visibility
@@ -33,17 +33,27 @@ document.addEventListener("DOMContentLoaded", () => {
             detailLinkAnchor.style.display = 'none';
         }
 
-        // 2. Handle the extra image (extraImg)
+        //extra image (extraImg)
         if (banner.extraImg) {
             detailImage.src = banner.extraImg;
-            detailImage.alt = banner.title + " Detail Image";
+
+            // Set the alt text using the title for context
+            detailImage.alt = banner.title + " Detailed Image";
             detailImage.style.display = 'block';
+
+            // Set the specific ARIA Label from the new 'extraAria' field
+            if (banner.extraAria) {
+                detailImage.setAttribute('aria-label', banner.extraAria);
+            } else {
+                detailImage.removeAttribute('aria-label');
+            }
+
         } else {
             detailImage.src = "";
             detailImage.style.display = 'none';
+            detailImage.removeAttribute('aria-label'); // Clean up ARIA if image is hidden
         }
 
-        // 3. Update the 'active' state for the list items (visual feedback)
         document.querySelectorAll('.img-box').forEach(box => {
             box.classList.remove('active');
         });
@@ -52,25 +62,23 @@ document.addEventListener("DOMContentLoaded", () => {
         if (activeBox) {
             activeBox.classList.add('active');
 
-            // ⭐ NEW: Scroll the selected item into the center of the scroll container
+        
             activeBox.scrollIntoView({
                 behavior: 'smooth',
                 block: 'center' // This centers the element vertically
             });
         }
     }
-    // --- Core Logic ---
 
     // Initial fetch and setup
     fetch("/api/banners")
         .then(response => response.json())
         .then(banners => {
-            allBanners = banners; // Store banners here, first thing!
+            allBanners = banners; // Store banners here
 
             let selectedBannerId = getQueryParam("banner");
             let selectedBanner = null;
 
-            // ⭐️ AUTO-SELECT LOGIC IS HERE (MISSING IN YOUR SNIPPET)
             if (!selectedBannerId && allBanners.length > 0) {
                 const firstBanner = allBanners[0];
                 selectedBannerId = firstBanner.id;
@@ -81,10 +89,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 selectedBanner = allBanners.find(b => b.id == selectedBannerId);
             }
 
-            // 1. Generate the list using the determined ID (from URL or auto-selected)
+            // Generate the list using the determined ID (from URL or auto-selected)
             generateList(allBanners, selectedBannerId);
 
-            // 2. Initial detail display using the determined banner object
+            // Initial detail display using the determined banner object
             if (selectedBanner) {
                 displayDetails(selectedBanner);
             } else {
@@ -98,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Function to generate list items and set up click handlers
     function generateList(data, activeId) {
         data.forEach((item) => {
-            // ... (rest of your list creation is the same) ...
+        
             const imgBox = document.createElement("div");
             imgBox.className = "img-box";
             imgBox.dataset.banner = item.id; // Crucial for selection
@@ -124,16 +132,14 @@ document.addEventListener("DOMContentLoaded", () => {
             imgBox.appendChild(gifDiv);
             scrollContainer.appendChild(imgBox);
 
-
-            // ** THE FIX IS HERE: Use a dynamic handler instead of full reload **
             imgBox.addEventListener("click", () => {
                 const clickedBanner = allBanners.find(b => b.id === item.id);
                 if (clickedBanner) {
-                    // 1. Update the URL without reloading the page
+                    // Update the URL without reloading the page
                     const newUrl = `${window.location.pathname}?banner=${item.id}`;
                     window.history.pushState({ bannerId: item.id }, clickedBanner.title, newUrl);
 
-                    // 2. Update the details content dynamically
+                    //Update the details content dynamically
                     displayDetails(clickedBanner);
                 }
             });
@@ -149,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 displayDetails(banner);
             }
         } else {
-            // If no banner is in the URL (e.g., hit back to Page2.html)
+            // If no banner is in the URL
             detailText.textContent = "Select a project from the left column to see its details.";
             detailImage.style.display = 'none';
             document.querySelectorAll('.img-box').forEach(box => {

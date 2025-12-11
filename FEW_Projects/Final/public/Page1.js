@@ -13,17 +13,18 @@ document.addEventListener("DOMContentLoaded", () => {
         data.forEach((item) => {
             // Create the cell div
             const cell = document.createElement("div");
-            
+
             // SIMPLIFIED: Every item is now just a 'rect'
-            cell.className = "cell rect"; 
-            
+            cell.className = "cell rect";
+
             // Set the Banner ID for the click
             cell.dataset.banner = item.id;
 
             // Create the image
             const img = document.createElement("img");
-            img.src = item.img || "Aesprite_Assets/square.png"; 
-            img.alt = item.title;
+            img.src = item.img || "Aesprite_Assets/square.png";
+            img.alt = item.thumbAria || `Thumbnail for project: ${item.title}`;
+
             img.loading = "lazy";
 
             // Assemble

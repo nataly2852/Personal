@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entry Slide</title>
+    <link rel="stylesheet" href="Entry.css">
+</head>
+
+<body>
+    <div id="entry-container">
+        <button id="enter-button"></button>
+    </div>
+
+    <div id="transition-overlay"></div>
+
+    <script>
+        document.getElementById('enter-button').addEventListener('click', () => {
+            // Initiate the fade out transition
+            document.getElementById('transition-overlay').classList.add('fade-out');
+        });
+
+
+    </script>
+</body>
+
+</html>
