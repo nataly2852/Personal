@@ -40,8 +40,13 @@ async function fetchBanners() {
       id: page.properties["Banner ID"]?.number,
       title: page.properties["Title"]?.title?.[0]?.plain_text || "",
       description: page.properties["Description"]?.rich_text?.[0]?.plain_text || "",
-      img: page.properties["IMG URL"]?.rich_text[0].plain_text || "",
-      extraImg: page.properties["Extra IMG"]?.rich_text[0].plain_text || "",
+
+      // 👇 FIX: Add ?. before [0] to check if the first element exists
+      img: page.properties["IMG URL"]?.rich_text?.[0]?.plain_text || "",
+      extraImg: page.properties["Extra IMG"]?.rich_text?.[0]?.plain_text || "",
+
+      // Note: The Link property is correctly using the dedicated URL property:
+      link: page.properties["Link"]?.url || "",
     }));
 
     console.log("Banners updated from Notion!");

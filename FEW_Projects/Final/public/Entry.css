@@ -1,0 +1,45 @@
+/* --- Entry Content Styling (Optional) --- */
+#entry-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url("Aesprite_Assets/EnterWindow.png");
+    background-size: cover;
+    border: none;
+}
+
+/* --- Corrected Transition Overlay Styling --- */
+#transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0;
+    /* Starts transparent */
+    visibility: hidden;
+    transition: opacity 2s ease-out;
+    /* Only transition opacity */
+    z-index: 9999;
+}
+
+/* Class added by JavaScript to start the transition */
+#transition-overlay.fade-to-black {
+    opacity: 1;
+    /* Becomes fully opaque */
+    visibility: visible;
+}
+
+#enter-button {
+    background-image: url("Aesprite_Assets/ClosedDoor.png");
+    background-color: rgba(0, 255, 255, 0);
+    
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 30vw;
+    height: 80vh;
+    border: none;
+}

@@ -8,12 +8,13 @@ header {
   /* background-color: rgb(255, 240, 224); */
   background-image: url("Aesprite_Assets/headerdesign.png");
   background-position: center;
+  background-color: #ffe6cb;
   height: 12vh;
   top: 0;
-  padding: 4e;
+  padding: 4em;
   width: 100%;
   border-bottom: 6px solid #94BDB1;
-
+  background-repeat: no-repeat;
   display: flex;
   /* NEW */
   justify-content: space-between;
@@ -28,13 +29,17 @@ header {
   background-image: url("Aesprite_Assets/Logo.png");
   background-size: cover;
   justify-content: flex-start;
-  width: 240px;
+  width: 80px;
   height: 120px;
   background-repeat: no-repeat;
   background-color: #6a4a3400;
   border: none;
   justify-content: center;
 
+}
+
+#Logo:hover {
+  transform: translatey(-10px);
 }
 
 .Logo-container {
@@ -131,6 +136,10 @@ body {
   overflow: hidden;
   font-weight: 600;
   font-size: 1rem;
+}
+
+.cell:hover {
+  transform: translatey(-10px);
 }
 
 /* Update this section in Page1.css */

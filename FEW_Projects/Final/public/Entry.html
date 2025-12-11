@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entry Slide</title>
+    <link rel="stylesheet" href="Entry.css">
+</head>
+
+<body>
+    <div id="entry-container">
+        <button id="enter-button"></button>
+    </div>
+
+    <div id="transition-overlay"></div>
+
+    <script>
+        document.getElementById('enter-button').addEventListener('click', () => {
+            // Initiate the fade out transition
+            document.getElementById('transition-overlay').classList.add('fade-out');
+        });
+
+        // The rest of the JS will be added below in Step 3\
+        document.addEventListener('DOMContentLoaded', () => {
+            const enterButton = document.getElementById('enter-button');
+            const overlay = document.getElementById('transition-overlay');
+            const targetPage = 'Page1.html'; // Define your target page
+
+            // 1. Click Listener
+            enterButton.addEventListener('click', () => {
+                // Step 1: Make the overlay visible and start the fade transition
+                overlay.classList.add('fade-to-black');
+            });
+
+            // 2. Transition End Listener (Waits for the fade animation to finish)
+            overlay.addEventListener('transitionend', (event) => {
+                // Ensure we only react to the opacity transition ending
+                if (event.propertyName === 'opacity' && overlay.classList.contains('fade-to-black')) {
+                    // Step 2: Once the screen is black, navigate to the next page
+                    window.location.href = targetPage;
+                }
+            });
+
+            // Optional: If you want the overlay to disappear on the destination page (Page1.html), 
+            // you'd add similar logic there, but since we are navigating, this is simpler.
+        });
+    </script>
+</body>
+
+</html>

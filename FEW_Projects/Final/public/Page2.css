@@ -3,10 +3,17 @@
     --cell-bg: #ddd;
 }
 
+
 body {
     margin: 0;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
-        Arial;
+
+    font-family: "Sour Gummy", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+
     background: #6a4a34;
     background-image: url("Aesprite_Assets/blossom.png");
     background-repeat: no-repeat;
@@ -22,11 +29,12 @@ header {
     background-image: url("Aesprite_Assets/headerdesign.png");
     background-position: center;
     height: 12vh;
+    background-color: #ffe6cb;
     top: 0;
     padding: 4e;
     width: 100%;
     border-bottom: 6px solid #94BDB1;
-
+    background-repeat: no-repeat;
     display: flex;
     /* NEW */
     justify-content: space-between;
@@ -41,13 +49,17 @@ header {
     background-image: url("Aesprite_Assets/Logo.png");
     background-size: cover;
     justify-content: flex-start;
-    width: 240px;
+    width: 80px;
     height: 120px;
     background-repeat: no-repeat;
     background-color: #6a4a3400;
     border: none;
     justify-content: center;
 
+}
+
+#Logo:hover {
+    transform: translatey(-10px);
 }
 
 .Logo-container {
@@ -90,10 +102,11 @@ button>.arrow {
 
 .container {
     display: flex;
-    background-image: url("Aesprite_Assets/Letter.png");
+    background-image: url("Aesprite_Assets/Letterwindow.png");
     background-position: center;
     width: 79vw;
-    margin-top: 4em;
+    height: 67vh;
+    margin-top: 5em;
     justify-self: center;
     align-self: center;
     border: 6px dashed brown;
@@ -228,12 +241,63 @@ button>.arrow {
     transform: rotate(-5deg);
 }
 
+
+/* Styling for the detail image in the right column */
+#detailImageContainer {
+    /* Ensures the container respects your column padding */
+    margin-bottom: 20px;
+    text-align: center;
+    /* Center the image */
+}
+
+#detailImage {
+    /* Ensure it doesn't overflow the right column */
+    max-width: 300;
+    background-color: #dabd98;
+    /* Keep aspect ratio */
+    height: 400px;
+    /* Add a nice border or shadow */
+    border-radius: 6px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+#detailText {
+    padding: 0 2em 2em 2em;
+    text-align: center;
+    font-size: 1.5em;
+    width: 100%;
+    overflow-wrap: break-word;
+    /* Modern equivalent of word-wrap: break-word */
+    word-break: break-all;
+    justify-content: center;
+}
+
+#detailLink {
+    background-color: #a6cfc6;
+    border-radius: 4em;
+    border: 2px solid #326568;
+    font-size: 16px;
+    height: 3em;
+    width: 13em;
+    align-items: center;
+    justify-content: center;
+}
+
+.projectSummary {
+    display: block;
+    padding: 2em 0;
+    text-align: end;
+    width: 100%;
+}
+
 .right-column {
+    width: 100%;
     border: none;
-    height: 426px;
     justify-items: center;
-    padding: 5vh 5vw 5vh 8vw;
+    align-items: center;
+    padding: 5vh 10vw 5vh 10vw;
     /* scales with screen */
     box-sizing: border-box;
     border-radius: 8px;
+    display: inline-flex;
 }

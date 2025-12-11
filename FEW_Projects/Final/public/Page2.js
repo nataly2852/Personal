@@ -1,99 +1,160 @@
-// Page2.js
+// CORRECTED CODE in Page2.js (near the top)
 
-const detailText = document.getElementById("detailText");
-const scrollBox = document.getElementById("scrollContainer");
+document.addEventListener("DOMContentLoaded", () => {
+    const scrollContainer = document.getElementById("scrollContainer");
+    const detailText = document.getElementById("detailText");
+    const detailImage = document.getElementById("detailImage");
+    const detailTitle = document.getElementById("detailTitle");
+    // const detailLink = document.getElementById("detailLink"); // REMOVE: Not needed, you use the anchor
+    const detailLinkAnchor = document.getElementById("detailLinkContainer"); // <-- FIX: Use correct HTML ID
+    let allBanners = []; 
+    // --- Helper Functions ---
 
-// 1. Fetch Data immediately
-fetch("/api/banners")
-    .then(response => response.json())
-    .then(banners => {
-        renderList(banners);
-        checkUrlParams(banners);
-    })
-    .catch(err => console.error("Error loading banners:", err));
+    // Function to get query parameters from the URL
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
 
-// 2. Function to build the HTML list
-function renderList(banners) {
-    scrollBox.innerHTML = ""; // Ensure empty
+    // Function to update the right column
+    function displayDetails(banner) {
 
-    banners.forEach((item, index) => {
-        // Create main wrapper: <div class="img-box">
-        const imgBox = document.createElement("div");
-        imgBox.className = "img-box";
-        imgBox.dataset.index = index; // Store index for easier lookup
+        //set title
+        detailTitle.textContent = banner.title;
 
-        // Create Thumbnail Image
-        const img = document.createElement("img");
-        img.className = "thumb";
-        img.src = item.img || "Aesprite_Assets/square.png";
-        img.dataset.desc = item.description; // Store desc on element
-        img.dataset.id = item.id;
+        // 1. Update the description text
+        detailText.textContent = banner.description;
 
-        // Create the GIF overlay (hidden by default via CSS)
-        const gifDiv = document.createElement("div");
-        gifDiv.className = "gif";
-        const gifImg = document.createElement("img");
-        gifImg.src = "Aesprite_Assets/Wanderer3.gif"; // Hardcoded or from Notion if you want
-        gifDiv.appendChild(gifImg);
+        // Set the link attribute and visibility
+        if (banner.link) {
+            detailLinkAnchor.href = banner.link;
+            detailLinkAnchor.style.display = 'inline-block'; // Or 'block', depending on CSS
+        } else {
+            detailLinkAnchor.style.display = 'none';
+        }
 
-        // Assemble
-        imgBox.appendChild(img);
-        imgBox.appendChild(gifDiv);
-        scrollBox.appendChild(imgBox);
+        // 2. Handle the extra image (extraImg)
+        if (banner.extraImg) {
+            detailImage.src = banner.extraImg;
+            detailImage.alt = banner.title + " Detail Image";
+            detailImage.style.display = 'block';
+        } else {
+            detailImage.src = "";
+            detailImage.style.display = 'none';
+        }
 
-        // Click Event
-        img.addEventListener("click", () => {
-            setActive(imgBox, item.description);
+        // 3. Update the 'active' state for the list items (visual feedback)
+        document.querySelectorAll('.img-box').forEach(box => {
+            box.classList.remove('active');
         });
-    });
-}
+        const activeBox = document.querySelector(`.img-box[data-banner="${banner.id}"]`);
 
-// 3. Handle Active State & Description
-function setActive(targetBox, description) {
-    // Remove 'active' from all boxes
-    document.querySelectorAll(".img-box").forEach(box => {
-        box.classList.remove("active");
-    });
+        if (activeBox) {
+            activeBox.classList.add('active');
 
-    // Add 'active' to clicked box
-    targetBox.classList.add("active");
-
-    // Update Text
-    detailText.textContent = description;
-    
-    // Smooth Scroll to it
-    targetBox.scrollIntoView({ behavior: "smooth", block: "center" });
-}
-
-// 4. Handle URL Params (Redirect from Page 1)
-function checkUrlParams(banners) {
-    const params = new URLSearchParams(window.location.search);
-    const bannerId = params.get("banner");
-
-    if (bannerId) {
-        // Find the index of the banner with this ID
-        const index = banners.findIndex(b => b.id == bannerId);
-        if (index !== -1) {
-            const boxes = document.querySelectorAll(".img-box");
-            if (boxes[index]) {
-                setActive(boxes[index], banners[index].description);
-                return;
-            }
+            // ⭐ NEW: Scroll the selected item into the center of the scroll container
+            activeBox.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center' // This centers the element vertically
+            });
         }
     }
+    // --- Core Logic ---
 
-    // Default: Select the first item if no URL param
-    const firstBox = document.querySelector(".img-box");
-    if (firstBox && banners.length > 0) {
-        setActive(firstBox, banners[0].description);
+    // Initial fetch and setup
+    fetch("/api/banners")
+        .then(response => response.json())
+        .then(banners => {
+            allBanners = banners; // Store banners here, first thing!
+
+            let selectedBannerId = getQueryParam("banner");
+            let selectedBanner = null;
+
+            // ⭐️ AUTO-SELECT LOGIC IS HERE (MISSING IN YOUR SNIPPET)
+            if (!selectedBannerId && allBanners.length > 0) {
+                const firstBanner = allBanners[0];
+                selectedBannerId = firstBanner.id;
+                selectedBanner = firstBanner;
+                // Update URL state via history.pushState()
+            } else if (selectedBannerId) {
+                // If an ID is in the URL, find that banner
+                selectedBanner = allBanners.find(b => b.id == selectedBannerId);
+            }
+
+            // 1. Generate the list using the determined ID (from URL or auto-selected)
+            generateList(allBanners, selectedBannerId);
+
+            // 2. Initial detail display using the determined banner object
+            if (selectedBanner) {
+                displayDetails(selectedBanner);
+            } else {
+                detailText.textContent = "Select a project from the left column to see its details.";
+                detailImage.style.display = 'none';
+            }
+        })
+        .catch(err => console.error("Error loading banners:", err));
+
+
+    // Function to generate list items and set up click handlers
+    function generateList(data, activeId) {
+        data.forEach((item) => {
+            // ... (rest of your list creation is the same) ...
+            const imgBox = document.createElement("div");
+            imgBox.className = "img-box";
+            imgBox.dataset.banner = item.id; // Crucial for selection
+
+            if (item.id == activeId) {
+                imgBox.classList.add('active');
+            }
+
+            // Create and append the thumbnail and GIF elements (as you had before)
+            const thumbImg = document.createElement("img");
+            thumbImg.className = "thumb";
+            thumbImg.src = item.img || "Aesprite_Assets/square.png";
+            thumbImg.alt = item.title;
+            thumbImg.loading = "lazy";
+
+            const gifDiv = document.createElement("div");
+            gifDiv.className = "gif";
+            const gifImg = document.createElement("img");
+            gifImg.src = "Aesprite_Assets/Wanderer3.gif";
+            gifDiv.appendChild(gifImg);
+
+            imgBox.appendChild(thumbImg);
+            imgBox.appendChild(gifDiv);
+            scrollContainer.appendChild(imgBox);
+
+
+            // ** THE FIX IS HERE: Use a dynamic handler instead of full reload **
+            imgBox.addEventListener("click", () => {
+                const clickedBanner = allBanners.find(b => b.id === item.id);
+                if (clickedBanner) {
+                    // 1. Update the URL without reloading the page
+                    const newUrl = `${window.location.pathname}?banner=${item.id}`;
+                    window.history.pushState({ bannerId: item.id }, clickedBanner.title, newUrl);
+
+                    // 2. Update the details content dynamically
+                    displayDetails(clickedBanner);
+                }
+            });
+        });
     }
-}
 
-// 5. Scroll Buttons (Up/Down)
-document.querySelector(".arrow.up").addEventListener("click", () => {
-    scrollBox.scrollBy({ top: -432, behavior: "smooth" });
-});
-
-document.querySelector(".arrow.down").addEventListener("click", () => {
-    scrollBox.scrollBy({ top: 432, behavior: "smooth" });
+    // Handle browser back/forward buttons for dynamic updates
+    window.addEventListener('popstate', (event) => {
+        const bannerIdFromUrl = getQueryParam("banner");
+        if (bannerIdFromUrl) {
+            const banner = allBanners.find(b => b.id == bannerIdFromUrl);
+            if (banner) {
+                displayDetails(banner);
+            }
+        } else {
+            // If no banner is in the URL (e.g., hit back to Page2.html)
+            detailText.textContent = "Select a project from the left column to see its details.";
+            detailImage.style.display = 'none';
+            document.querySelectorAll('.img-box').forEach(box => {
+                box.classList.remove('active');
+            });
+        }
+    });
 });
